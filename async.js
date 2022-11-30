@@ -14,4 +14,5 @@ hello('hi').then(
     (val)=>{console.log(val);
     })
 
+    output('hello')
     
