@@ -1,18 +1,31 @@
-async function hello(mes){
-    console.log(mes);
-    let promise= new Promise((res,rej)=>{
-        setTimeout(res("it works"),3000);
-        setTimeout(rej("timeout"),2000);  
-    });
-    let result= await promise;
-    return `${mes} ${result}`; 
-}
-function output(mes){
-    console.log(`${mes}` )
-}
-hello('hi').then(
-    (val)=>{console.log(val);
-    })
+var fs = require('fs')
 
-    output('hello')
-    
+var obj={}
+
+function one(){
+    return new Promise(function(resolve,reject){
+        fs.readFile('file1.txt', function(err,data){
+            if(!err){
+                resolve(data.toString())
+            }
+        })
+    })
+}
+
+function two(){
+    return new Promise(function(resolve,reject){
+        fs.readFile('file2.txt', function(err,data){
+            if(!err){
+                resolve(data.toString())
+            }
+        })
+    })
+}
+
+async function main() {
+    obj['Data1']= await one();
+    obj['Data2']= await two();
+    console.log(obj);
+}
+
+main();
